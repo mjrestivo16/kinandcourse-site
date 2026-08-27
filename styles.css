@@ -1,0 +1,823 @@
+/* ==========================================================================
+   Kin & Course — kinandcourse.com
+   One stylesheet. No framework, no build step.
+
+   Direction: a well-set record book. Warm paper, evergreen ink, brass rules.
+   Display face: Fraunces (bookish, hand-set warmth).
+   Body/UI face: Public Sans (humanist, the face of clear official forms).
+   Signature device: course-catalog leader dots (.spec) carrying package scope.
+   ========================================================================== */
+
+/* --------------------------------------------------------------- 1. Tokens */
+
+:root {
+  /* Color */
+  --paper:       #f4efe4;
+  --paper-2:     #fbf8f1;
+  --paper-3:     #efe8d9;
+  --ink:         #16352b;
+  --ink-body:    #35473f;
+  --ink-soft:    #5a6a61;
+  --brass:       #8a6414;
+  --brass-soft:  #c9a24a;
+  --rule:        #dcd3c2;
+  --rule-strong: #c4b89f;
+  --green-deep:  #10281f;
+
+  /* Type */
+  --display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --step--1: 0.8125rem;
+  --step-0:  1.0625rem;
+  --step-1:  1.1875rem;
+  --step-2:  clamp(1.35rem, 1.2rem + 0.7vw, 1.6rem);
+  --step-3:  clamp(1.75rem, 1.45rem + 1.4vw, 2.35rem);
+  --step-4:  clamp(2.1rem, 1.6rem + 2.4vw, 3.1rem);
+  --step-5:  clamp(2.6rem, 1.75rem + 3.9vw, 4.35rem);
+
+  /* Space */
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --section: clamp(3.75rem, 8vw, 7rem);
+  --measure: 36rem;
+  --shell: 68rem;
+
+  --radius: 4px;
+}
+
+/* ------------------------------------------------------------- 2. Baseline */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink-body);
+  font-family: var(--sans);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-optical-sizing: auto;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--step-5); line-height: 1.02; letter-spacing: -0.025em; }
+h2 { font-size: var(--step-4); }
+h3 { font-size: var(--step-2); letter-spacing: -0.01em; }
+h4 { font-size: var(--step-1); font-weight: 600; letter-spacing: 0; }
+
+p, ul, ol, dl { margin: 0 0 1.15em; }
+p { text-wrap: pretty; }
+li { margin-bottom: 0.4em; }
+
+a { color: var(--brass); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { color: var(--ink); }
+
+strong { font-weight: 600; color: var(--ink); }
+
+img, svg { max-width: 100%; height: auto; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2.5rem 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection { background: var(--brass-soft); color: var(--green-deep); }
+
+/* --------------------------------------------------------------- 3. Layout */
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.shell--narrow { max-width: 46rem; }
+
+.band { padding-block: var(--section); }
+.band--tint { background: var(--paper-2); border-block: 1px solid var(--rule); }
+.band--deep { background: var(--green-deep); color: var(--paper); }
+.band--deep h2, .band--deep h3 { color: var(--paper); }
+.band--tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
+
+.prose { max-width: var(--measure); }
+.prose--wide { max-width: 44rem; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.5rem; top: -4rem;
+  z-index: 20;
+  background: var(--green-deep);
+  color: var(--paper);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+.skip-link:focus { top: 0.5rem; color: var(--paper); }
+
+/* --------------------------------------------- 4. Eyebrows, rules, letters */
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 0 1rem;
+}
+.band--deep .eyebrow { color: var(--brass-soft); }
+
+.section-head { margin-bottom: clamp(2rem, 4vw, 3.25rem); }
+.section-head p { max-width: var(--measure); font-size: var(--step-1); color: var(--ink-body); }
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--ink-body);
+}
+
+.fineprint {
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.band--deep .fineprint { color: #a9bcb1; }
+.band--deep .lede { color: #dfe9e2; }
+
+/* The recurring rule motif: a short brass mark above a block. */
+.mark::before {
+  content: "";
+  display: block;
+  width: 2.25rem;
+  height: 2px;
+  background: var(--brass);
+  margin-bottom: 1.5rem;
+}
+.band--deep .mark::before { background: var(--brass-soft); }
+
+/* --------------------------------------------------------------- 5. Header */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.masthead__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.75rem;
+  padding-block: 1.1rem;
+}
+
+.wordmark {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  margin-right: auto;
+  white-space: nowrap;
+}
+.wordmark:hover { color: var(--brass); }
+.wordmark .amp { color: var(--brass); font-style: italic; padding-inline: 0.06em; }
+
+.masthead nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.4rem;
+  font-size: 0.95rem;
+}
+.masthead nav a {
+  color: var(--ink-body);
+  text-decoration: none;
+  padding-block: 0.2rem;
+  border-bottom: 1px solid transparent;
+}
+.masthead nav a:hover { color: var(--ink); border-bottom-color: var(--brass); }
+
+/* ---------------------------------------------------------------- 6. Buttons */
+
+.btn {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  padding: 0.95rem 1.6rem;
+  border: 1px solid var(--green-deep);
+  border-radius: var(--radius);
+  background: var(--green-deep);
+  color: var(--paper);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.btn:hover { background: var(--ink); color: var(--paper); transform: translateY(-1px); }
+.btn:active { transform: none; }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--rule-strong);
+}
+.btn--ghost:hover { background: var(--paper-3); color: var(--ink); border-color: var(--ink); }
+
+.btn--light {
+  background: var(--paper);
+  color: var(--green-deep);
+  border-color: var(--paper);
+}
+.btn--light:hover { background: var(--brass-soft); color: var(--green-deep); }
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+/* ------------------------------------------------------------------ 7. Hero */
+
+.hero { padding-block: clamp(3rem, 7vw, 5.5rem) clamp(3.5rem, 7vw, 6rem); }
+
+.hero__grid {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  align-items: start;
+}
+
+/* Grid items default to min-width:auto, so a wide child (the transcript
+   table's min-width) would push the track past the viewport instead of
+   scrolling inside .record__scroll. Let the tracks shrink. */
+.hero__grid > * { min-width: 0; }
+
+@media (min-width: 60rem) {
+  .hero__grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 4.5rem; }
+}
+
+.hero h1 { margin-bottom: 0.35em; }
+.hero__lede { font-size: clamp(1.1rem, 1rem + 0.5vw, 1.3rem); line-height: 1.5; max-width: 32rem; }
+
+.hero__note {
+  border-left: 2px solid var(--brass);
+  padding-left: 1rem;
+  margin: 0;
+  max-width: 32rem;
+}
+
+/* ------------------------------------------- 8. Signature: the record sheet */
+
+.record { margin: 0; }
+
+.record__sheet {
+  position: relative;
+  background: var(--paper-2);
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  box-shadow: 0 1px 2px rgba(22, 53, 43, 0.06), 0 12px 28px -18px rgba(22, 53, 43, 0.4);
+}
+
+/* Suggestion of further sheets beneath — the stack of paperwork. */
+.record__sheet::after {
+  content: "";
+  position: absolute;
+  inset: auto -7px -7px 7px;
+  height: 7px;
+  border: 1px solid var(--rule);
+  border-top: 0;
+  border-radius: 0 0 2px 2px;
+  background: var(--paper-3);
+  z-index: -1;
+}
+
+.record__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.record__title {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.record__seal {
+  font-family: var(--sans);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass);
+  border: 1px solid var(--brass-soft);
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  white-space: nowrap;
+}
+
+.record__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  gap: 0.35rem 1.25rem;
+  margin: 0.9rem 0 1.15rem;
+  font-size: var(--step--1);
+}
+.record__facts dt {
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.625rem;
+  color: var(--ink-soft);
+}
+.record__facts dd {
+  margin: 0 0 0.35rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.record__scroll { overflow-x: auto; }
+
+.record__table {
+  width: 100%;
+  min-width: 18rem; /* fits a 375px screen without hiding a column */
+  border-collapse: collapse;
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+.record__table th,
+.record__table td {
+  text-align: left;
+  padding: 0.42rem 0.5rem 0.42rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.record__table thead th {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom-color: var(--rule-strong);
+}
+.record__table td { color: var(--ink-body); }
+.record__table .num { text-align: right; padding-right: 0; width: 4.5rem; }
+.record__table tbody tr:last-child td { border-bottom: 0; }
+
+.record__table tfoot td {
+  border-top: 2px solid var(--ink);
+  border-bottom: 0;
+  padding-top: 0.6rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.record__sign {
+  margin: 1.1rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px dashed var(--rule-strong);
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.record__sign strong { color: var(--ink); }
+
+.record figcaption {
+  margin-top: 1.1rem;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* ------------------------------------- 9. Leader-dot spec list (the device) */
+
+.spec-list {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+}
+
+.spec {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0.42rem 0;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.spec__dots {
+  flex: 1 1 1.5rem;
+  min-width: 1.25rem;
+  border-bottom: 1px dotted var(--rule-strong);
+  transform: translateY(-0.25em);
+}
+
+.spec__val {
+  flex: none;
+  color: var(--brass);
+  font-weight: 700;
+}
+
+.spec--off { color: var(--ink-soft); }
+.spec--off .spec__val { color: var(--rule-strong); }
+.spec--off .spec__dots { border-bottom-color: var(--rule); }
+
+/* -------------------------------------------------------------- 10. Cards */
+
+.cards {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 52rem) {
+  .cards { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper-2);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 3vw, 2rem);
+}
+
+.card__index {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 0.75rem;
+}
+
+.card h3 { margin-bottom: 0.6rem; }
+
+.card__price {
+  font-family: var(--display);
+  font-size: var(--step-3);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0 0 0.25rem;
+}
+.card__price span {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.card__turn {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  margin: 0 0 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.card__blurb { font-size: 0.95rem; margin-bottom: 1.25rem; }
+
+.card .spec-list { margin-top: auto; }
+
+.card__cta { margin-top: 1rem; }
+.card__cta .btn { display: block; text-align: center; }
+
+/* ------------------------------------------------------------- 11. Steps */
+
+.steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 52rem) {
+  .steps { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+}
+
+.steps li {
+  counter-increment: step;
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--ink);
+}
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  display: block;
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--brass);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+.steps h3 { font-size: var(--step-1); margin-bottom: 0.4rem; }
+.steps p { font-size: 0.95rem; margin: 0; }
+
+/* -------------------------------------------------------------- 12. Notes */
+
+.note {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--brass);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.1rem 1.35rem;
+  margin: 2rem 0 0;
+  max-width: 44rem;
+}
+.note p:last-child { margin-bottom: 0; }
+.note h3 { font-size: var(--step-1); margin-bottom: 0.35rem; }
+
+/* ---------------------------------------------------------------- 13. FAQ */
+
+.faq { max-width: 46rem; }
+
+.faq details {
+  border-top: 1px solid var(--rule-strong);
+  padding: 0.35rem 0;
+}
+.faq details:last-of-type { border-bottom: 1px solid var(--rule-strong); }
+
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1rem 0;
+  font-family: var(--display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.faq summary::-webkit-details-marker { display: none; }
+
+.faq summary::after {
+  content: "+";
+  margin-left: auto;
+  flex: none;
+  font-family: var(--sans);
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--brass);
+}
+.faq details[open] summary::after { content: "\2013"; }
+
+.faq summary:hover { color: var(--brass); }
+
+.faq .faq__body {
+  padding-bottom: 1.1rem;
+  max-width: var(--measure);
+}
+.faq .faq__body p:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- 14. Forms */
+
+.form { max-width: 40rem; }
+
+.field { margin-bottom: 1.6rem; }
+
+.field > label,
+.field > .field__legend {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.field__hint {
+  display: block;
+  font-weight: 400;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  margin: -0.15rem 0 0.5rem;
+  line-height: 1.5;
+}
+
+.req { color: var(--brass); font-weight: 700; }
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.85rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+textarea { min-height: 8rem; resize: vertical; }
+
+select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%),
+                    linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
+  background-position: right 1.05rem center, right 0.75rem center;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 2.25rem;
+}
+
+input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--brass);
+  box-shadow: 0 0 0 3px rgba(201, 162, 74, 0.28);
+  outline: none;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0 0 1.6rem;
+}
+legend { padding: 0; }
+
+.form__group {
+  display: grid;
+  gap: 0 1.25rem;
+}
+@media (min-width: 40rem) {
+  .form__group { grid-template-columns: 1fr 1fr; }
+}
+
+.form__actions {
+  border-top: 1px solid var(--rule-strong);
+  padding-top: 1.75rem;
+  margin-top: 2.25rem;
+}
+
+/* Honeypot — hidden from people, visible to bots. */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------- 15. Footer */
+
+.footer { background: var(--green-deep); color: #c2d2c8; }
+.footer a { color: var(--paper); text-decoration-color: rgba(244, 239, 228, 0.4); }
+.footer a:hover { color: var(--brass-soft); }
+
+.footer__inner {
+  padding-block: clamp(2.75rem, 6vw, 4rem);
+  display: grid;
+  gap: 2rem;
+}
+@media (min-width: 48rem) {
+  .footer__inner { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 3rem; }
+}
+
+.footer .wordmark { color: var(--paper); margin: 0 0 0.75rem; display: inline-block; }
+.footer .wordmark:hover { color: var(--brass-soft); }
+
+.footer h2 {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass-soft);
+  margin-bottom: 0.9rem;
+}
+
+.footer ul { list-style: none; margin: 0; padding: 0; }
+.footer li { margin-bottom: 0.5rem; }
+
+.footer__legal {
+  border-top: 1px solid rgba(244, 239, 228, 0.15);
+  padding-block: 1.35rem 2rem;
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: #92a89b;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: space-between;
+}
+
+/* --------------------------------------------------------- 16. Page pieces */
+
+.page-head {
+  padding-block: clamp(2.75rem, 6vw, 4.5rem) clamp(1.75rem, 4vw, 2.75rem);
+  border-bottom: 1px solid var(--rule);
+}
+.page-head h1 { font-size: var(--step-4); }
+.page-head p { max-width: var(--measure); margin-bottom: 0; }
+
+.doc { max-width: 42rem; padding-block: var(--section); }
+.doc h2 { font-size: var(--step-2); margin-top: 2.5rem; }
+.doc h2:first-of-type { margin-top: 0; }
+.doc ul { padding-left: 1.15rem; }
+
+.stack-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.u-flush { margin: 0; }
+.u-gap-top { margin-top: 2.5rem; }
+
+.centered { text-align: center; margin-inline: auto; }
+.centered .btn-row { justify-content: center; }
+.centered .mark::before { margin-inline: auto; }
+
+/* ------------------------------------------------------------- 17. Motion */
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__grid > * {
+    animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .hero__grid > *:nth-child(2) { animation-delay: 0.12s; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --------------------------------------------------------------- 18. Print */
+
+@media print {
+  .masthead nav, .btn, .skip-link { display: none; }
+  body { background: #fff; color: #000; }
+  .band--deep, .footer { background: #fff; color: #000; }
+}
