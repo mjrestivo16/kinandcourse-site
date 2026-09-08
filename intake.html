@@ -35,7 +35,7 @@
   <div class="shell page-head">
     <p class="eyebrow">Step one of three</p>
     <h1>Tell us what you have.</h1>
-    <p class="lede">About ten minutes. Nothing to pay and nothing to organize first &mdash; a messy pile of records is the normal starting point. Mark reads every intake personally and replies within one business day.</p>
+    <p class="lede">Only your name, email, and state are required. Add anything else you know, or leave it for our reply. Nothing to pay and nothing to organize first &mdash; a messy pile of records is the normal starting point. Mark reads every intake personally and replies within one business day.</p>
   </div>
 
   <section class="band">
@@ -134,8 +134,8 @@
 
           <div class="form__group">
             <div class="field">
-              <label for="grade">Current grade <span class="req" aria-hidden="true">*</span></label>
-              <select id="grade" name="Current grade" required>
+              <label for="grade">Current grade (optional)</label>
+              <select id="grade" name="Current grade">
                 <option value="">Choose a grade</option>
                 <option>8th grade or earlier</option>
                 <option>9th grade</option>
@@ -147,9 +147,9 @@
             </div>
 
             <div class="field">
-              <label for="grad-year">Expected graduation year <span class="req" aria-hidden="true">*</span></label>
+              <label for="grad-year">Expected graduation year (optional)</label>
               <span class="field__hint" id="grad-hint">A best guess is fine.</span>
-              <input type="number" id="grad-year" name="Expected graduation year" min="2015" max="2040" step="1" inputmode="numeric" placeholder="2027" aria-describedby="grad-hint" required>
+              <input type="number" id="grad-year" name="Expected graduation year" min="2015" max="2040" step="1" inputmode="numeric" placeholder="2027" aria-describedby="grad-hint">
             </div>
           </div>
         </fieldset>
@@ -158,9 +158,9 @@
           <legend class="eyebrow">What you need</legend>
 
           <div class="field">
-            <label for="package">Which package interests you? <span class="req" aria-hidden="true">*</span></label>
+            <label for="package">Which package interests you? (optional)</label>
             <span class="field__hint" id="package-hint">Not sure is a perfectly good answer &mdash; we will tell you which one fits, including when the answer is none of them.</span>
-            <select id="package" name="Package of interest" aria-describedby="package-hint" required>
+            <select id="package" name="Package of interest" aria-describedby="package-hint">
               <option value="">Choose a package</option>
               <option>Transcript Build &#8212; $249</option>
               <option>Course-of-Study Plan &#8212; $449</option>
@@ -170,9 +170,9 @@
           </div>
 
           <div class="field">
-            <label for="records">What records do you have? <span class="req" aria-hidden="true">*</span></label>
+            <label for="records">What records do you have? (optional)</label>
             <span class="field__hint" id="records-hint">A few sentences is plenty. Spreadsheets, curriculum lists, reading logs, co-op syllabi, portfolio work, receipts, or mostly memory &mdash; describe it honestly. Nothing here is a wrong answer, and you do not need to attach anything yet.</span>
-            <textarea id="records" name="Records on hand" rows="6" aria-describedby="records-hint" required></textarea>
+            <textarea id="records" name="Records on hand" rows="6" aria-describedby="records-hint"></textarea>
           </div>
 
           <div class="field">
@@ -182,8 +182,8 @@
           </div>
 
           <div class="field">
-            <label for="timeline">When do you need this? <span class="req" aria-hidden="true">*</span></label>
-            <select id="timeline" name="Timeline" required>
+            <label for="timeline">When do you need this? (optional)</label>
+            <select id="timeline" name="Timeline">
               <option value="">Choose a timeline</option>
               <option>As soon as possible &#8212; I have a deadline</option>
               <option>Within a month</option>
